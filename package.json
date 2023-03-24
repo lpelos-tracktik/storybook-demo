@@ -2,14 +2,15 @@
   "name": "tt-storybook-demo",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "run-p type-check build-only",
-    "preview": "vite preview --port 4173",
     "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit",
+    "build-storybook": "build-storybook",
+    "build": "run-p type-check build-only",
+    "dev": "vite",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "preview": "vite preview --port 4173",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "test-storybook": "test-storybook",
+    "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
     "vue": "^2.7.7",
@@ -23,6 +24,7 @@
     "@storybook/addon-interactions": "^6.5.16",
     "@storybook/addon-links": "^6.5.16",
     "@storybook/builder-vite": "^0.4.2",
+    "@storybook/test-runner": "^0.9.4",
     "@storybook/testing-library": "^0.0.13",
     "@storybook/vue": "^6.5.16",
     "@types/node": "^16.11.45",
