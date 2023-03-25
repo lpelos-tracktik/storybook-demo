@@ -1,9 +1,10 @@
 <template>
-  <div class="site-list">
+  <div class="site-list" role="list">
     <div
       v-for="site in sites"
       class="list-item"
       :key="site.id"
+      role="listitem"
       @click="$emit('click:item', site)"
     >
       <SiteSummary class="site" :site="site" />

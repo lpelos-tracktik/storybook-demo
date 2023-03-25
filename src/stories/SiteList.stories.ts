@@ -3,8 +3,8 @@ import { action } from "@storybook/addon-actions";
 import { userEvent, within } from "@storybook/testing-library";
 
 import SiteList from "../../src/components/SiteList.vue";
+import { getCanvasElement } from "./helpers";
 import { sites } from "./__fixtures__/sites.fixture";
-import { sleep } from "./helpers";
 
 //#region Meta
 
@@ -51,12 +51,13 @@ ClickItems.args = propsData;
 
 /**
  * @see https://storybook.js.org/docs/vue/writing-stories/play-function
+ * @see https://storybook.js.org/docs/react/writing-tests/interaction-testing
  */
-ClickItems.play = async ({ canvasElement }) => {
+ClickItems.play = async () => {
+  const canvasElement = await getCanvasElement();
   const canvas = within(canvasElement);
 
-  for (const site of sites) {
-    await userEvent.click(canvas.getByText(site.title));
-    await sleep(500);
-  }
+  sites.forEach((site) => {
+    userEvent.click(canvas.getByText(site.title));
+  });
 };

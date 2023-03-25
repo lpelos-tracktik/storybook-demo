@@ -13,6 +13,7 @@ module.exports = {
     "builder": "@storybook/builder-vite"
   },
   "features": {
-    "storyStoreV7": true
+    "interactionsDebugger": true, // 👈 Enable playback controls
+    "storyStoreV7": true,
   }
 }
