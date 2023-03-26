@@ -26,6 +26,15 @@ export interface ContactsData {
   main: ContactData;
 }
 
+export interface PicsumDimensions {
+  height?: number;
+  width?: number;
+}
+
+export interface PicsumOptions {
+  dimensions?: PicsumDimensions;
+}
+
 export interface SiteData {
   address: AddressData;
   // clientId: string;

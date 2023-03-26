@@ -38,7 +38,7 @@ const Template: Story = (_args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { SiteList },
   data: () => ({ actions: actionsData }),
-  template: '<SiteList v-bind="$props" v-on="actions" />',
+  template: `<SiteList v-bind="$props" v-on="actions" />`,
 });
 
 export const Default: Story = Template.bind({});
