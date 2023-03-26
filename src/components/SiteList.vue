@@ -20,10 +20,16 @@ import Vue from "vue";
 import type { SiteData } from "@/types";
 import SiteSummary from "./SiteSummary.vue";
 
+/**
+ * List sites
+ */
 export default Vue.extend({
   name: "SiteList",
   components: { SiteSummary },
   props: {
+    /**
+     * Sites data
+     */
     sites: { type: Array as PropType<SiteData[]>, required: true },
   },
 });

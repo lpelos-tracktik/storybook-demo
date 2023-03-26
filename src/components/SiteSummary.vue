@@ -5,7 +5,7 @@
     <div class="content">
       <strong class="title">{{ site.title }}</strong>
       <AddressSummary :address="site.address" />
-      <div class="contact-name">{{ site.contact.name }}</div>
+      <div class="contact-name">{{ contactName }}</div>
     </div>
   </div>
 </template>
@@ -29,6 +29,12 @@ export default Vue.extend({
      * Site data
      */
     site: { type: Object as PropType<SiteData>, required: true },
+  },
+  computed: {
+    contactName(): string {
+      const { firstName, lastName } = this.site.contacts.main;
+      return [firstName, lastName].join(" ");
+    },
   },
 });
 </script>

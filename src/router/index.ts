@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomeView from "../views/HomeView.vue";
+
+import SiteListView from "../views/SiteListView.vue";
 
 Vue.use(VueRouter);
 
@@ -10,8 +11,8 @@ const router = new VueRouter({
   routes: [
     {
       path: "/",
-      name: "home",
-      component: HomeView,
+      name: "siteList",
+      component: SiteListView,
     },
     {
       path: "/about",

@@ -6,19 +6,34 @@ export interface AddressData {
   zipCode: string;
 }
 
+export interface APIOptions {
+  limit?: number;
+}
+
 export interface ContactData {
   address: AddressData;
   email: string;
+  firstName: string;
   id: string;
   jobTitle: string;
-  name: string;
+  lastName: string;
   phoneNumber: string;
+}
+
+export interface ContactsData {
+  // createdAt: string;
+  id: string;
+  main: ContactData;
 }
 
 export interface SiteData {
   address: AddressData;
-  contact: ContactData;
+  // clientId: string;
+  contacts: ContactsData;
   id: string;
+  // createdAt: string;
   images: string[];
   title: string;
+  // tags: string[];
+  // updatedAt: string;
 }

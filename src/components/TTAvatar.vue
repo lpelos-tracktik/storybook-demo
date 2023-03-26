@@ -1,6 +1,7 @@
 <template>
   <div class="tt-avatar" :style="style" :title="alt">
-    <span v-if="!src" class="initial">{{ initial }}</span>
+    <img v-show="false" :src="src" :alt="alt" @error="useFallback = true" />
+    <span v-if="useFallback" class="initial">{{ initial }}</span>
   </div>
 </template>
 
@@ -23,6 +24,11 @@ export default Vue.extend({
      */
     src: { type: String, default: undefined },
   },
+  data() {
+    return {
+      useFallback: false,
+    };
+  },
   computed: {
     initial(): string {
       return this.alt[0];
@@ -30,6 +36,14 @@ export default Vue.extend({
     style(): StyleValue {
       if (!this.src) return {};
       return { backgroundImage: `url(${this.src})`, backgroundSize: "cover" };
+    },
+  },
+  watch: {
+    src: {
+      immediate: true,
+      handler(src: string) {
+        this.useFallback = !src;
+      },
     },
   },
 });

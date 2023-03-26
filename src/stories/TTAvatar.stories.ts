@@ -38,3 +38,10 @@ WithSrc.args = {
   ...propsData,
   src: "https://picsum.photos/800/600",
 };
+
+export const WithBrokenSrc: Story = Template.bind({});
+
+WithBrokenSrc.args = {
+  ...propsData,
+  src: "https://non-existing-url",
+};
