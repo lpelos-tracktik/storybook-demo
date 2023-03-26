@@ -1,8 +1,22 @@
 <template>
   <div class="image-galery">
     <img class="image-wrapper" :src="images[active]" />
-    <button class="previous-btn" type="button" @click="goBack">‹</button>
-    <button class="forward-btn" type="button" @click="goForward">›</button>
+    <button
+      v-if="canNavigate"
+      class="previous-btn"
+      type="button"
+      @click="goBack"
+    >
+      ‹
+    </button>
+    <button
+      v-if="canNavigate"
+      class="forward-btn"
+      type="button"
+      @click="goForward"
+    >
+      ›
+    </button>
   </div>
 </template>
 
@@ -24,6 +38,9 @@ export default Vue.extend({
     };
   },
   computed: {
+    canNavigate(): boolean {
+      return this.images.length > 1;
+    },
     lastIndex(): number {
       return this.images.length - 1;
     },

@@ -8,7 +8,7 @@ export default class PicsumService {
   }
 
   getRandom(options?: PicsumOptions): string {
-    const id = this.getRamdomId();
+    const id = this.getRandomId();
     return this.getById(id, options);
   }
 
@@ -20,7 +20,7 @@ export default class PicsumService {
     return `${url}/${width}/${height}`;
   }
 
-  private getRamdomId(): number {
-    return Math.floor(Math.random() * 1000);
+  private getRandomId(): number {
+    return Math.floor(Math.random() * 85);
   }
 }

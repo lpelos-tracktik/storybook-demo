@@ -8,11 +8,20 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 
 export default class ApiService {
   private api: AxiosInstance;
-  private pixumService: PicsumService;
+  private picsumService: PicsumService;
 
-  constructor({ baseURL = BASE_URL, pixumService = new PicsumService() } = {}) {
+  constructor({
+    baseURL = BASE_URL,
+    picsumService = new PicsumService(),
+  } = {}) {
     this.api = axios.create({ baseURL });
-    this.pixumService = pixumService;
+    this.picsumService = picsumService;
+  }
+
+  getSite(id: string): Promise<SiteData> {
+    return this.api
+      .get(`/sites/${id}`)
+      .then((value) => this.fixSiteImages(value.data));
   }
 
   getSiteList({ limit }: APIOptions = {}): Promise<SiteData[]> {
@@ -30,13 +39,13 @@ export default class ApiService {
       if (!matches) return image;
 
       const [_, width, height] = matches as [string, number, number];
-      return this.pixumService.getRandom({ dimensions: { height, width } });
+      return this.picsumService.getRandom({ dimensions: { height, width } });
     });
 
     return { ...site, images };
   }
 
   private fixSitesImages(sites: SiteData[]): SiteData[] {
-    return sites.map(this.fixSiteImages);
+    return sites.map((site) => this.fixSiteImages(site));
   }
 }
