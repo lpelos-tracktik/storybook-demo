@@ -1,5 +1,5 @@
 <template>
-  <div v-if="loading">Loading...</div>
+  <LoadingIndicator v-if="loading" dark style="height: 100vh" />
   <SiteList v-else :sites="sites" @click:item="goToSite($event)" />
 </template>
 
@@ -8,11 +8,15 @@ import Vue from "vue";
 
 import type { SiteData } from "@/types";
 import ApiService from "@/services/api-service";
+import LoadingIndicator from "@/components/LoadingIndicator.vue";
 import SiteList from "@/components/SiteList.vue";
 
 export default Vue.extend({
   name: "SiteListView",
-  components: { SiteList },
+  components: {
+    LoadingIndicator,
+    SiteList,
+  },
   data() {
     return {
       api: new ApiService(),
