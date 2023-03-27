@@ -7,9 +7,9 @@
 import Vue from "vue";
 
 import type { SiteData } from "@/types";
-import ApiService from "@/services/api-service";
-import LoadingIndicator from "@/components/LoadingIndicator.vue";
-import SiteDetail from "@/components/SiteDetail.vue";
+import ApiService from "../services/api-service";
+import LoadingIndicator from "../components/LoadingIndicator.vue";
+import SiteDetail from "../components/SiteDetail.vue";
 
 export default Vue.extend({
   name: "SiteDetailView",

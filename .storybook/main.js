@@ -16,5 +16,6 @@ module.exports = {
   features: {
     interactionsDebugger: true, // 👈 Enable playback controls
     storyStoreV7: true,
-  }
+  },
+  staticDirs: ['../public']
 }

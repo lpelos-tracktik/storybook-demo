@@ -6,28 +6,50 @@ import PicsumService from "./picsum-service";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 
+export enum ApiPaths {
+  Site = "/sites/:id",
+  SiteList = "/sites",
+}
+
 export default class ApiService {
   private api: AxiosInstance;
+  private baseURL: string;
   private picsumService: PicsumService;
 
   constructor({
     baseURL = BASE_URL,
     picsumService = new PicsumService(),
   } = {}) {
+    this.baseURL = baseURL;
     this.api = axios.create({ baseURL });
     this.picsumService = picsumService;
   }
 
+  getPath(path: ApiPaths, params: Record<string, any> = {}): string {
+    return Object.entries(params).reduce(
+      (acc, [key, value]) => acc.replace(`:${key}`, value),
+      path as string
+    );
+  }
+
   getSite(id: string): Promise<SiteData> {
-    return this.api
-      .get(`/sites/${id}`)
-      .then((value) => this.fixSiteImages(value.data));
+    const path = this.getPath(ApiPaths.Site, { id });
+    return this.api.get(path).then((value) => this.fixSiteImages(value.data));
   }
 
   getSiteList({ limit }: APIOptions = {}): Promise<SiteData[]> {
+    const path = this.getPath(ApiPaths.SiteList);
+    const params = { _limit: limit };
     return this.api
-      .get("/sites", { params: { _limit: limit } })
+      .get(path, { params })
       .then((value) => this.fixSitesImages(value.data));
+  }
+
+  getUrl(path: ApiPaths, params: Record<string, any> = {}): string {
+    const apiPath = this.getPath(path, params);
+    return [this.baseURL.replace(/\/$/, ""), apiPath.replace(/^\//, "")].join(
+      "/"
+    );
   }
 
   /**

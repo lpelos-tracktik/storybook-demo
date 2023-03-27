@@ -1,16 +1,26 @@
 /**
- * @see https://storybook.js.org/docs/6.0/vue/configure/overview#configure-story-rendering
+ * @see https://storybook.js.org/docs/vue/configure/overview#configure-story-rendering
  */
 
 import type { StoryObj } from '@storybook/vue'
+import * as MswStorybookAddon from 'msw-storybook-addon';
 
 /**
- * @see https://storybook.js.org/docs/6.0/vue/writing-stories/decorators#global-decorators
+ * @see https://storybook.js.org/addons/msw-storybook-addon
  */
-export const decorators: StoryObj['decorators'] = [];
+MswStorybookAddon.initialize({
+  onUnhandledRequest: "bypass",
+});
 
 /**
- * @see https://storybook.js.org/docs/6.0/vue/writing-stories/parameters#global-parameters
+ * @see https://storybook.js.org/docs/vue/writing-stories/decorators#global-decorators
+ */
+export const decorators: StoryObj['decorators'] = [
+  MswStorybookAddon.mswDecorator,
+];
+
+/**
+ * @see https://storybook.js.org/docs/vue/writing-stories/parameters#global-parameters
  */
 export const parameters: StoryObj['parameters'] = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -23,6 +33,6 @@ export const parameters: StoryObj['parameters'] = {
 };
 
 /**
- * @see https://storybook.js.org/docs/6.0/vue/essentials/toolbars-and-globals#global-types-and-the-toolbar-annotation
+ * @see https://storybook.js.org/docs/vue/essentials/toolbars-and-globals#global-types-and-the-toolbar-annotation
  */
 export const globalTypes = {}
