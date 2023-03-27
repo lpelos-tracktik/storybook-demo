@@ -4,6 +4,7 @@
     <button
       v-if="canNavigate"
       class="previous-btn"
+      title="previous"
       type="button"
       @click="goBack"
     >
@@ -12,6 +13,7 @@
     <button
       v-if="canNavigate"
       class="forward-btn"
+      title="next"
       type="button"
       @click="goForward"
     >

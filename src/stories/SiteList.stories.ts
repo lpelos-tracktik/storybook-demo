@@ -57,7 +57,7 @@ ClickItems.play = async () => {
   const canvasElement = await getCanvasElement();
   const canvas = within(canvasElement);
 
-  sites.forEach((site) => {
-    userEvent.click(canvas.getByText(site.title));
-  });
+  await Promise.all(
+    sites.map((site) => userEvent.click(canvas.getByText(site.title)))
+  );
 };

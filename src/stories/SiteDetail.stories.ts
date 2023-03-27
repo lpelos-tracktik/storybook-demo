@@ -1,8 +1,10 @@
 import type { Meta, Story } from "@storybook/vue";
 import { action } from "@storybook/addon-actions";
+import { userEvent, within } from "@storybook/testing-library";
 
 import SiteDetail from "../components/SiteDetail.vue";
 import { sites } from "./__fixtures__/sites.fixture";
+import { getCanvasElement } from "./helpers";
 
 //#region Meta
 
@@ -42,3 +44,14 @@ const Template: Story = (_args, { argTypes }) => ({
 export const Default: Story = Template.bind({});
 
 Default.args = propsData;
+
+export const ClickBack: Story = Template.bind({});
+
+ClickBack.args = propsData;
+
+ClickBack.play = async () => {
+  const canvasElement = await getCanvasElement();
+  const canvas = within(canvasElement);
+
+  await userEvent.click(canvas.getByTitle("go back"));
+};

@@ -1,7 +1,7 @@
 <template>
   <div class="site-detail">
     <div class="summary-wrapper">
-      <div class="chevron" @click="$emit('click:back')">‹</div>
+      <div class="chevron" title="go back" @click="$emit('click:back')">‹</div>
       <SiteSummary :site="site" />
     </div>
     <ImageGalery :images="site.images" />
